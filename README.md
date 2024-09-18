@@ -1,6 +1,6 @@
 [![icon](https://github.com/eppic/ytBATCH/blob/main/bin/256.ico)](https://github.com/eppic/ytBASH)
 # ytBASH
-An easy to use shell script (Linux) for downloading audio and video using yt-dlp
+An easy to use shell script (for Linux) for downloading audio and video using yt-dlp
 
 ## Windows Version:
 ytBASH is heavily inspired by [ytBATCH](https://github.com/eppic/ytBATCH) - It's the same thing but for windows, also made by me
