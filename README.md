@@ -7,7 +7,7 @@ An easy to use shell script (for Linux) for downloading audio and video using yt
 ytBASH is heavily inspired by [ytBATCH](https://github.com/eppic/ytBATCH) - It's the same thing but for windows, also made by me
 
 ## Features
-- Lighting Fast downloads thanks to [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+- Lightning Fast downloads thanks to [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - Config File
 - Download History
 - Cookie implementation
