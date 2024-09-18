@@ -1,4 +1,5 @@
-[![icon](https://github.com/eppic/ytBATCH/blob/main/bin/256.ico)](https://github.com/eppic/ytBASH)
+[![icon](https://github.com/user-attachments/assets/19d84434-5186-4855-afec-2cd30316e978)](https://github.com/eppic/ytBASH)
+
 # ytBASH
 An easy to use shell script (for Linux) for downloading audio and video using yt-dlp
 
