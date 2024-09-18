@@ -36,7 +36,7 @@ ytBASH is heavily inspired by [ytBATCH](https://github.com/eppic/ytBATCH) - It's
 ![image](https://github.com/user-attachments/assets/e6e0dd4c-3ebe-4f55-b8f2-3e17f3a9ad06)
 
 ## Todo:
-There are still a lot of things to do
+There are still a lot of things to do  
 Here is a short list:
 - Implement Queue
 - Add a dependency check
