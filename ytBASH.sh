@@ -50,7 +50,7 @@ menu_main() {
     fi
 
     # check cookie option before entering options menu
-    if [ "$cookiesdefault" = false ]; then
+    if [ "$cookiesdefault" = true ]; then
         option_cookies=true
     fi
 
@@ -286,6 +286,7 @@ menu_preferences() {
         echo "[G] Generate .desktop file"
     fi
     echo "[O] Open script directory"
+    echo "[R] Open github repository"
     echo
     echo "[B] Go Back "
     check_invalid
@@ -342,6 +343,9 @@ menu_preferences() {
         [Oo])
             nohup xdg-open "$(dirname "$(realpath "$0")")" &>/dev/null & 
             ;;
+        [Rr])
+            xdg-open https://github.com/eppic/ytBASH
+            ;;
         [Bb])
             return
             ;;
@@ -373,7 +377,7 @@ pref_defaultdir() {
     echo "In that case you need to edit it manually: ~/.ytBASH-config)"
     echo
 
-    DOWNLOAD_DIR_temp=$(zenity --file-selection --directory --title="Select Default Download Directory")
+    DOWNLOAD_DIR_temp=$(zenity --file-selection --directory --title="Choose Default Download Directory" 2>/dev/null)
 
     if [ -n "$DOWNLOAD_DIR_temp" ]; then
         DOWNLOAD_DIR=$DOWNLOAD_DIR_temp
