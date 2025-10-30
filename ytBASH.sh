@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # version
-version=0.2
+version=0.3
 
 # menu 
 menu_main() {
