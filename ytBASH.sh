@@ -97,6 +97,12 @@ menu_options() {
         else 
             echo -e "\e[32m[TRUE]\e[0m"
         fi
+    echo -n "[R] Use Proxy "
+        if [ "$option_proxy" = false ]; then
+            echo -e "\e[31m[FALSE]\e[0m"
+        else 
+            echo -e "\e[32m[TRUE]\e[0m"
+        fi
     echo
     echo "[B] Go Back"
     check_invalid
@@ -152,6 +158,14 @@ menu_options() {
             fi
             menu_options
             ;;
+        [Rr])
+            if [ "$option_proxy" = false ]; then
+                option_proxy=true
+            else 
+                option_proxy=false
+            fi
+            menu_options
+            ;;
         [Bb])
             return
             ;;
@@ -178,6 +192,7 @@ dl_audio() {
         $playlist_mode \
         $subtitles_mode \
         $cookies_mode \
+        $proxy_mode \
         $audiocover_mode \
         --output "$DOWNLOAD_DIR/%(title)s.%(ext)s" \
         "$URL"
@@ -199,6 +214,7 @@ dl_video() {
         $playlist_mode \
         $subtitles_mode \
         $cookies_mode \
+        $proxy_mode \
         --output "$DOWNLOAD_DIR/%(title)s.%(ext)s" \
         "$URL"
     print_line
@@ -214,7 +230,7 @@ dl_list() {
 
     check_options
 
-    yt-dlp $cookies_mode -F $URL 
+    yt-dlp $cookies_mode $proxy_mode -F $URL 
 
     print_line
     echo
@@ -237,6 +253,7 @@ dl_list() {
         $playlist_mode \
         $subtitles_mode \
         $cookies_mode \
+        $proxy_mode \
         --output "$DOWNLOAD_DIR/%(title)s.%(ext)s" \
         "$URL"
         
@@ -270,6 +287,8 @@ menu_preferences() {
         else 
             echo -e "\e[32m[TRUE]\e[0m"
         fi
+    echo -n "[P] Set up Proxy "
+        echo -e "\e[34m[$SET_PROXY]\e[0m"
     echo -n "[T] Use video thumbnail as audio cover "
         if [ "$thumbnailaudiocover" = false ]; then
             echo -e "\e[31m[FALSE]\e[0m"
@@ -309,7 +328,6 @@ menu_preferences() {
             pref_defaultdir
             ;;
         [Cc])
-
             check_cookies
 
             if [ "$cookiereturn" = true ]; then
@@ -322,6 +340,10 @@ menu_preferences() {
                 fi
             fi
 
+            write_preferences
+            ;;
+        [Pp])
+            pref_proxy
             write_preferences
             ;;
         [Tt])
@@ -374,6 +396,7 @@ write_preferences() {
     echo "DOWNLOAD_DIR=$DOWNLOAD_DIR" >> "$CONFIG_FILE"
     echo "keephistory=$keephistory" >> "$CONFIG_FILE"
     echo "cookiesdefault=$cookiesdefault" >> "$CONFIG_FILE"
+    echo "SET_PROXY=$SET_PROXY" >> "$CONFIG_FILE"
     echo "thumbnailaudiocover=$thumbnailaudiocover" >> "$CONFIG_FILE"
     echo "cleanqueue=$cleanqueue" >> "$CONFIG_FILE"
 
@@ -397,6 +420,18 @@ pref_defaultdir() {
     else
         echo "No directory selected."
     fi
+}
+
+pref_proxy() {
+    print_details
+    echo "Type in the proxy you want to use here."
+    echo "This will be handled as in: 'yt-dlp --proxy YOURPROXYHERE ...'"
+    echo "For more information check the yt-dlp help section."
+    echo "When finished, press ENTER."
+    echo
+
+    echo -n "Proxy: "
+    read SET_PROXY
 }
 
 pref_desktop() {
@@ -499,6 +534,13 @@ check_options() {
         cookies_mode=
     fi
 
+    #check if proxy is enabled
+    if [ "$option_proxy" = true ]; then
+        proxy_mode="--proxy=$SET_PROXY "
+    else 
+        proxy_mode=
+    fi
+
     # check if thumbnail audio cover is enabled
     if [ "$thumbnailaudiocover" = true ]; then
         audiocover_mode=--embed-thumbnail
@@ -530,6 +572,7 @@ switch_options() {
     option_playlist=false
     option_subtitles=false
     option_cookies=false
+    option_proxy=false
 }
 
 clean_url() {
@@ -569,11 +612,13 @@ set_defaults() {
     option_cookies=false
     option_playlist=false
     option_subtitles=false
+    option_proxy=false
     inv_url=false
 
     DESKTOP_FILE_PATH="$HOME/.local/share/applications/ytBASH.desktop"
     CONFIG_DIR="$HOME/.config/ytBASH"
     CONFIG_FILE="$CONFIG_DIR/ytBASH.conf"
+    SET_PROXY=
 
     switch_options    
 
@@ -606,6 +651,7 @@ load_preferences() {
                 "DOWNLOAD_DIR") DOWNLOAD_DIR="$value" ;;
                 "keephistory") keephistory="$value" ;;
                 "cookiesdefault") cookiesdefault="$value" ;;
+                "SET_PROXY") SET_PROXY="$value" ;;
                 "thumbnailaudiocover") thumbnailaudiocover="$value" ;;
                 "cleanqueue") cleanqueue="$value" ;;
             esac
