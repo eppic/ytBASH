@@ -258,7 +258,7 @@ menu_preferences() {
     echo
     echo -n "[D] Change default download directory "
         echo -e "\e[34m[$DOWNLOAD_DIR]\e[0m"
-    echo -n "[H] Keep download history (~/.ytBASH-history)"
+    echo -n "[H] Keep download history (~/.ytBASH-history) "
         if [ "$keephistory" = false ]; then
             echo -e "\e[31m[FALSE]\e[0m"
         else 
