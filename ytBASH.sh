@@ -451,14 +451,13 @@ pref_desktop() {
     else
         # write the .desktop file content
         echo "[Desktop Entry]" > "$DESKTOP_FILE_PATH"
-        echo "Version=$version" >> "$DESKTOP_FILE_PATH"
         echo "Name=ytBASH" >> "$DESKTOP_FILE_PATH"
         echo "Comment=Download video or audio using yt-dlp" >> "$DESKTOP_FILE_PATH"
         echo "Exec=$SCRIPT_PATH" >> "$DESKTOP_FILE_PATH"
         echo "Icon=youtube-dl" >> "$DESKTOP_FILE_PATH"
         echo "Terminal=true" >> "$DESKTOP_FILE_PATH"
         echo "Type=Application" >> "$DESKTOP_FILE_PATH"
-        echo "Categories=Utility;Network;" >> "$DESKTOP_FILE_PATH"
+        echo "Categories=Utility;" >> "$DESKTOP_FILE_PATH"
 
         echo "Desktop file generated at $DESKTOP_FILE_PATH"
         echo
