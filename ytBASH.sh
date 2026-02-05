@@ -194,7 +194,7 @@ dl_audio() {
         $cookies_mode \
         $proxy_mode \
         $audiocover_mode \
-        --output "$DOWNLOAD_DIR/%(title)s.%(ext)s" \
+        --output "$DOWNLOAD_DIR/%(title).200s.%(ext)s" \
         "$URL"
     print_line
     echo "Finished!"
@@ -215,7 +215,7 @@ dl_video() {
         $subtitles_mode \
         $cookies_mode \
         $proxy_mode \
-        --output "$DOWNLOAD_DIR/%(title)s.%(ext)s" \
+        --output "$DOWNLOAD_DIR/%(title).200s.%(ext)s" \
         "$URL"
     print_line
     echo "Finished!"
@@ -254,7 +254,7 @@ dl_list() {
         $subtitles_mode \
         $cookies_mode \
         $proxy_mode \
-        --output "$DOWNLOAD_DIR/%(title)s.%(ext)s" \
+        --output "$DOWNLOAD_DIR/%(title).200s.%(ext)s" \
         "$URL"
         
     print_line
